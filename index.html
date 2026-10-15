@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feliz Primer Mes, Mi Amor</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ffe6eb 0%, #ffc3a0 50%, #ffa1ac 100%);
+      font-family: 'Poppins', sans-serif;
+      color: #4a1525;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    header {
+      text-align: center;
+      margin: 20px 0 30px;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      color: #b8143a;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    p.subtitle {
+      font-size: 1.1rem;
+      color: #6b2135;
+      margin-top: 5px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    /* Interactive Heart Section */
+    .heart-section {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .heart-container {
+      position: relative;
+      width: 320px;
+      height: 300px;
+      margin: 20px auto;
+    }
+
+    .phrase-node {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: #e63946;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 0.8rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(230, 57, 70, 0.4);
+      transition: all 0.3s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    .phrase-node:hover {
+      transform: translate(-50%, -50%) scale(1.3);
+      background: #ff4d6d;
+    }
+
+    .phrase-node.unlocked {
+      background: #ffb703;
+      color: #4a1525;
+      box-shadow: 0 4px 12px rgba(255, 183, 3, 0.6);
+    }
+
+    .card-display {
+      min-height: 90px;
+      margin-top: 15px;
+      padding: 15px 20px;
+      background: #ffffff;
+      border-left: 5px solid #e63946;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      color: #800f2f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-style: italic;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    /* Controls / Actions */
+    .action-btn {
+      background: linear-gradient(45deg, #ff4d6d, #c9184a);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(201, 24, 74, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin: 10px 5px;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(201, 24, 74, 0.4);
+    }
+
+    /* Bouquet Section */
+    .bouquet-section {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .bouquet-svg {
+      width: 200px;
+      height: 220px;
+      margin: 10px auto;
+      filter: drop-shadow(0px 8px 10px rgba(0,0,0,0.15));
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Mailbox Section */
+    .mailbox-section {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .mailbox-section h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.2rem;
+      color: #a4133c;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .letter-card {
+      background: #fff0f3;
+      border: 2px dashed #ff4d6d;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .letter-card h3 {
+      color: #800f2f;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .letter-meta {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #c9184a;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #ffccd5;
+      padding-bottom: 5px;
+    }
+
+    .letter-body {
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: #333;
+      white-space: pre-line;
+    }
+
+    /* Falling Hearts Overlay */
+    .heart-particle {
+      position: fixed;
+      top: -20px;
+      color: #ff4d6d;
+      font-size: 20px;
+      user-select: none;
+      pointer-events: none;
+      z-index: 9999;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #800f2f;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Feliz 1er Mes de Novios ❤️</h1>
+    <p class="subtitle">Haz clic en cada punto del corazón para revelar las frases especiales</p>
+  </header>
+
+  <div class="container">
+    
+    <!-- Heart Section -->
+    <div class="heart-section">
+      <div class="heart-container" id="heartContainer"></div>
+      <div class="card-display" id="phraseDisplay">
+        Haz clic en cualquier número del corazón para descubrir un mensaje secreto...
+      </div>
+      <p style="margin-top: 15px; font-size: 0.9rem; color: #a4133c;">
+        Desbloqueadas: <span id="unlockCount">0</span> / 20
+      </p>
+    </div>
+
+    <!-- Controls -->
+    <div style="text-align: center;">
+      <button class="action-btn" onclick="triggerHeartRain()">🌧️ Lluvia de corazones</button>
+    </div>
+
+    <!-- Bouquet Section -->
+    <div class="bouquet-section">
+      <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #a4133c;">Un Ramo de Rosas Para Ti 🌹</h2>
+      <svg class="bouquet-svg" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+        <!-- Stems -->
+        <path d="M90 120 L70 200" stroke="#2d6a4f" stroke-width="4" stroke-linecap="round"/>
+        <path d="M100 120 L100 205" stroke="#1b4332" stroke-width="5" stroke-linecap="round"/>
+        <path d="M110 120 L130 200" stroke="#2d6a4f" stroke-width="4" stroke-linecap="round"/>
+        <!-- Ribbon -->
+        <path d="M85 170 Q100 180 115 170 Q100 160 85 170 Z" fill="#ff4d6d"/>
+        <circle cx="100" cy="170" r="5" fill="#c9184a"/>
+        <!-- Leaves -->
+        <path d="M75 150 Q60 140 70 130 Q80 140 75 150 Z" fill="#52b788"/>
+        <path d="M125 150 Q140 140 130 130 Q120 140 125 150 Z" fill="#52b788"/>
+        <!-- Roses -->
+        <!-- Rose 1 Left -->
+        <circle cx="70" cy="80" r="22" fill="#d90429"/>
+        <circle cx="70" cy="80" r="14" fill="#ef233c"/>
+        <circle cx="70" cy="80" r="7" fill="#ff4d6d"/>
+        <!-- Rose 2 Center -->
+        <circle cx="100" cy="60" r="26" fill="#b7094c"/>
+        <circle cx="100" cy="60" r="17" fill="#a4133c"/>
+        <circle cx="100" cy="60" r="8" fill="#ff4d6d"/>
+        <!-- Rose 3 Right -->
+        <circle cx="130" cy="80" r="22" fill="#d90429"/>
+        <circle cx="130" cy="80" r="14" fill="#ef233c"/>
+        <circle cx="130" cy="80" r="7" fill="#ff4d6d"/>
+        <!-- Rose 4 Top -->
+        <circle cx="100" cy="35" r="18" fill="#ff4d6d"/>
+        <circle cx="100" cy="35" r="10" fill="#ff758f"/>
+      </svg>
+      <p style="margin-top: 10px; color: #590d22;">Con todo mi amor para la persona más hermosa.</p>
+    </div>
+
+    <!-- Virtual Mailbox Section -->
+    <div class="mailbox-section">
+      <h2>📬 Buzón de Cartas Virtuales</h2>
+      
+      <!-- Letter 1 -->
+      <div class="letter-card">
+        <h3>💖 Carta 1: Un día cualquiera pensando en ti</h3>
+        <div class="letter-meta">
+          <strong>Para:</strong> Nayeli &nbsp;|&nbsp; <strong>Asunto:</strong> Solo quería recordarte lo mucho que te amo
+        </div>
+        <div class="letter-body">Hola, mi vida:
+Hoy me desperté con una sonrisa en el rostro y la certeza de que tenerte en mi vida es el regalo más hermoso de todos. No hace falta que sea nuestro aniversario ni una fecha comercial para decirte lo mucho que valoro cada segundo a tu lado. Tu risa es mi sonido favorito y tus abrazos, mi lugar seguro. Gracias por ser mi compañera, mi confidente y mi amor. Que tengas un día maravilloso. Te amo con todo mi corazón.</div>
+      </div>
+
+      <!-- Letter 2 -->
+      <div class="letter-card">
+        <h3>💖 Carta 2: En la distancia, pero siempre juntos</h3>
+        <div class="letter-meta">
+          <strong>Para:</strong> Nayeli (La dueña de mis pensamientos) &nbsp;|&nbsp; <strong>Asunto:</strong> Rompiendo la distancia
+        </div>
+        <div class="letter-body">Mi amor:
+Mirar la pantalla y ver tus mensajes me alegra el día, pero no te niego que cuento los segundos para poder abrazarte de nuevo. La distancia física es solo un número cuando dos almas están tan conectadas como las nuestras. Cada pensamiento mío lleva tu nombre. Gracias por hacerme sentir tan cerca de ti a pesar de los kilómetros. Pronto estaremos juntos y recuperaremos cada instante. Te extraño y te amo infinitamente.</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    Hecho con todo el amor del mundo para Nayeli en nuestro primer mes 💕
+  </footer>
+
+  <script>
+    const phrases = [
+      "Mi lugar favorito en el mundo es a tu lado.",
+      "Eres la razón de mi sonrisa todos los días.",
+      "Cada segundo contigo es un recuerdo hermoso.",
+      "Eres mi casualidad más bonita.",
+      "Agradezco cada día por tenerte en mi vida.",
+      "Tu sonrisa es lo que mejor me sale en el día.",
+      "Contigo el mundo es un lugar mucho más lindo.",
+      "Eres mi refugio y mi paz.",
+      "No te imaginas lo mucho que me gustas.",
+      "El mejor momento del día es cuando estoy contigo.",
+      "Eres todo lo que alguna vez soñé.",
+      "Mi amor por ti crece con cada detalle.",
+      "Haces que los días difíciles sean fáciles.",
+      "Eres mi pensamiento favorito.",
+      "Contigo me saqué la lotería de la vida.",
+      "Tu felicidad es mi mayor deseo.",
+      "No hay nadie en el mundo que se compare a ti.",
+      "A tu lado todo es mejor.",
+      "Eres la historia más bonita que Dios escribió en mi vida.",
+      "Te amo hoy más que ayer y menos que mañana."
+    ];
+
+    const heartContainer = document.getElementById('heartContainer');
+    const phraseDisplay = document.getElementById('phraseDisplay');
+    const unlockCount = document.getElementById('unlockCount');
+    let unlockedSet = new Set();
+
+    // Generar coordenadas en forma de corazón (Heart Curve Equation)
+    function generateHeartPoints(total) {
+      const points = [];
+      const width = 280;
+      const height = 260;
+      const cx = 160;
+      const cy = 130;
+
+      for (let i = 0; i < total; i++) {
+        let t = (i / total) * (2 * Math.PI);
+        // Equac. paramétrica de corazón
+        let x = 16 * Math.pow(Math.sin(t), 3);
+        let y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+        
+        // Escalar y centrar
+        let px = cx + x * 8.5;
+        let py = cy + y * 8.5;
+
+        points.push({ x: px, y: py });
+      }
+      return points;
+    }
+
+    const points = generateHeartPoints(phrases.length);
+
+    points.forEach((pt, index) => {
+      const node = document.createElement('div');
+      node.className = 'phrase-node';
+      node.style.left = `${pt.x}px`;
+      node.style.top = `${pt.y}px`;
+      node.innerText = index + 1;
+
+      node.addEventListener('click', () => {
+        phraseDisplay.innerText = `"${phrases[index]}"`;
+        node.classList.add('unlocked');
+        unlockedSet.add(index);
+        unlockCount.innerText = unlockedSet.size;
+        createMiniBurst(pt.x, pt.y);
+      });
+
+      heartContainer.appendChild(node);
+    });
+
+    // Efecto de lluvia de corazones
+    function triggerHeartRain() {
+      const symbols = ['❤️', '💖', '💕', '💗', '🌹', '✨'];
+      for (let i = 0; i < 40; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.className = 'heart-particle';
+          heart.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+          heart.style.left = Math.random() * 100 + 'vw';
+          heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+          heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+          document.body.appendChild(heart);
+
+          setTimeout(() => heart.remove(), 5000);
+        }, i * 100);
+      }
+    }
+
+    // Efecto visual al presionar un punto del corazón
+    function createMiniBurst(x, y) {
+      for(let i = 0; i < 5; i++) {
+        const particle = document.createElement('div');
+        particle.innerText = '✨';
+        particle.style.position = 'absolute';
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+        particle.style.pointerEvents = 'none';
+        particle.style.transition = 'all 0.8s ease-out';
+        heartContainer.appendChild(particle);
+
+        setTimeout(() => {
+          particle.style.transform = `translate(${(Math.random()-0.5)*80}px, ${(Math.random()-0.5)*80}px)`;
+          particle.style.opacity = '0';
+        }, 10);
+
+        setTimeout(() => particle.remove(), 850);
+      }
+    }
+  </script>
+</body>
+</html>
